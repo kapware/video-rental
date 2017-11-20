@@ -1,14 +1,10 @@
 (ns video-rental.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
-            [schema.core :as s]))
-
-(s/defschema Pizza
-  {:name s/Str
-   (s/optional-key :description) s/Str
-   :size (s/enum :L :M :S)
-   :origin {:country (s/enum :FI :PO)
-            :city s/Str}})
+            [clojure.spec.alpha :as s]
+            [spec-tools.spec :as spec]
+            [video-rental.inventory.film :as film]
+            [video-rental.inventory.search :as search]))
 
 (def app
   (api
@@ -21,15 +17,10 @@
 
     (context "/api" []
       :tags ["api"]
+      :coercion :spec
 
-      (GET "/plus" []
-        :return {:result Long}
-        :query-params [x :- Long, y :- Long]
-        :summary "adds two numbers together a"
-        (ok {:result (+ x y)}))
-
-      (POST "/echo" []
-        :return Pizza
-        :body [pizza Pizza]
-        :summary "echoes a Pizza"
-        (ok pizza)))))
+      (GET "/film" []
+        :return (s/coll-of ::film/film)
+        :query-params [title :- ::film/title]
+        :summary "returns films"
+        (ok (search/find-by-title title))))))
