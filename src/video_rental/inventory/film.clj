@@ -18,20 +18,20 @@
       (< old-year year last-year) :regular
       :else :old)))
 
-(def prices {:premium 40 :basic 30})
+(def prices {:premium 40M :basic 30M})
 
 (defn- calculate-price-with-limit [days rate day-limit]
   (if (<= days day-limit)
          rate
-         (* rate (- days (dec day-limit)))))
+         (*' 1M rate (- days (dec day-limit)))))
 
-(defmulti price (fn [current-year film days] (film-type film current-year)))
+(defmulti price (fn [current-year film rent] (film-type film current-year)))
 
-(defmethod price :new-release [current-year film days]
-  (* (:premium prices) days))
+(defmethod price :new-release [current-year film {days :days}]
+  (*' 1M (:premium prices) days))
 
-(defmethod price :regular [current-year film days]
+(defmethod price :regular [current-year film {days :days}]
   (calculate-price-with-limit days (:basic prices) 3))
 
-(defmethod price :old [current-year film days]
+(defmethod price :old [current-year film {days :days}]
   (calculate-price-with-limit days (:basic prices) 5))

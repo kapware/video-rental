@@ -4,7 +4,10 @@
             [clojure.spec.alpha :as s]
             [spec-tools.spec :as spec]
             [video-rental.inventory.film :as film]
-            [video-rental.inventory.search :as search]))
+            [video-rental.inventory.search :as search]
+            [video-rental.registry.rent :as rent]
+            [video-rental.registry.rent-out :as rent-out]
+            [video-rental.date-util :as date-util]))
 
 (def app
   (api
@@ -23,4 +26,11 @@
         :return (s/coll-of ::film/film)
         :query-params [title :- ::film/title]
         :summary "returns films"
-        (ok (search/find-by-title title))))))
+        (ok (search/find-by-title title)))
+
+      (POST "/rent" []
+        :return ::rent/rent
+        :body [rent ::rent/rent]
+        :summary "rent out films"
+        (created nil (rent-out/rent-out (date-util/current-year!) 1 rent)))
+      )))

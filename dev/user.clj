@@ -1,9 +1,11 @@
 (ns user
   (:require [clojure.test :refer [run-tests]]
             [video-rental.core-test]
-            [video-rental.inventory.film-test]
             [video-rental.inventory.film :as film]
+            [video-rental.inventory.film-test]
             [video-rental.inventory.search-test]
+            [video-rental.registry.rent-test]
+            [video-rental.registry.rent-out-test]
             [clojure.spec.alpha :as spec]
             [clojure.java.jdbc :as j]
             [clojure-csv.core :as csv]))
@@ -45,5 +47,7 @@
 (defn run-all-tests []
   (run-tests 'video-rental.core-test
              'video-rental.inventory.film-test
-             'video-rental.inventory.search-test))
+             'video-rental.inventory.search-test
+             'video-rental.registry.rent-test
+             'video-rental.registry.rent-out-test))
 

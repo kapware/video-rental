@@ -22,9 +22,9 @@
 
 (deftest rent-prices
   (testing "Should charge for rental based on types and days"
-    (is (= 40 (sut/price 2017 {:year 2016} 1)))
-    (is (= 400 (sut/price 2017 {:year 2016} 10)))
-    (is (= 30 (sut/price 2017 {:year 2015} 1)))
-    (is (= 30 (sut/price 2017 {:year 2015} 3)))
-    (is (= 90 (sut/price 2017 {:year 2015} 5)))
-    (is (= 90 (sut/price 2017 {:year 1965} 7)))))
+    (is (= 40M (sut/price 2017 {:year 2016} {:days  1})))
+    (is (= 400M (sut/price 2017 {:year 2016} {:days 10})))
+    (is (= 30M (sut/price 2017 {:year 2015} {:days 1})))
+    (is (= 30M (sut/price 2017 {:year 2015} {:days 3})))
+    (is (= 90M (sut/price 2017 {:year 2015} {:days 5})))
+    (is (= 90M (sut/price 2017 {:year 1965} {:days 7})))))

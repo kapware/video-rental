@@ -5,7 +5,8 @@
                   [org.clojure/java.jdbc "0.7.3"]
                   [org.postgresql/postgresql "42.1.4"]
                   [metosin/spec-tools "0.5.1"]
-                  [mount "0.1.11"]]
+                  [mount "0.1.11"]
+                  [korma "0.4.0"]]
    :ring {:handler video-rental.handler/app
           :init mount.core/start
           :destroy mount.core/stop
@@ -13,7 +14,7 @@
    :uberjar-name "server.jar"
    :profiles {:dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]
                                    [cheshire "5.5.0"]
-                                   [ring/ring-mock "0.3.0"]
+                                   [ring/ring-mock "0.3.2"]
                                    [clojure-csv/clojure-csv "2.0.1"]
                                    [com.h2database/h2 "1.4.196"]]
                     :plugins [[lein-ring "0.12.0"]]
