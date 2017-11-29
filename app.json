@@ -1,0 +1,6 @@
+{
+  "name": "Video rental demo",
+  "description": "Video rental demo application",
+  "image": "heroku/clojure",
+  "addons": [ "heroku-postgresql" ]
+}

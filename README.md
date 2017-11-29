@@ -23,6 +23,8 @@ java -jar target/server.jar
 
 `lein ring uberwar`
 
+### Deploy to Heroku
+
 ```sh
 $ heroku create
 $ git push heroku master
