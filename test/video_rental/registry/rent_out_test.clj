@@ -17,6 +17,7 @@
                     {:tid "tt0234215", :title "Matrix Reloaded (2003)", :year 2003}
                     {:tid "tt0027977", :title "Moderne Zeiten (1936)", :year 1936}
                     {:tid "tt0242653", :title "Matrix Revolutions (2003)", :year 2003}])
+  (j/insert! mem-db :user {:id 1 :bonus 0})
   (j/insert! mem-db :rent {:id 1 :created #inst"2017-11-23T20:34:39.957-00:00" :userid 1})
   (j/insert! mem-db :rentfilm {:rentid 1 :tid "tt0027977" :days 13 :charge 240 :created #inst"2017-11-23T20:34:39.957-00:00"})
 
@@ -40,4 +41,5 @@
       (is (= {:rent-films [{:tid "tt0133093" :days 5 :charge 30M}
                            {:tid "tt0025316" :days 2 :charge 30M}
                            {:tid "tt0031381" :days 1 :charge 30M}]}
-             result)))))
+             (dissoc result :rentid)))
+      (is (some? (:rentid result))))))

@@ -5,7 +5,8 @@
 
 (deftest rent-request-examples
   (testing "Should support valid rent requests"
-    (is (spec/valid? ::sut/rent {:rent-films [{:tid "tt0133093" :days 7}
+    (is (spec/valid? ::sut/rent {:rent-id 1
+                                 :rent-films [{:tid "tt0133093" :days 7}
                                               {:tid "tt0145487" :days 11}
                                               {:tid "tt0316654" :days 12}]}))))
 

@@ -7,7 +7,11 @@
             [video-rental.inventory.search :as search]
             [video-rental.registry.rent :as rent]
             [video-rental.registry.rent-out :as rent-out]
-            [video-rental.date-util :as date-util]))
+            [video-rental.registry.return :as return]
+            [video-rental.registry.to-return :as to-return]
+            [video-rental.util :as util]))
+
+(def user-id 1)
 
 (def app
   (api
@@ -32,5 +36,10 @@
         :return ::rent/rent
         :body [rent ::rent/rent]
         :summary "rent out films"
-        (created nil (rent-out/rent-out (date-util/current-year!) 1 rent)))
-      )))
+        (created nil (rent-out/rent-out (util/year-of (util/now!)) user-id rent)))
+
+      (POST "/return" []
+        :return ::return/return
+        :body [return ::return/return]
+        :summary "return films"
+        (created nil (to-return/to-return (util/now!) user-id return))))))

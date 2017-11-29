@@ -2,11 +2,12 @@
   (:require [video-rental.db :refer [db]]
             [clojure.java.jdbc :as j]
             [video-rental.inventory.film :as film]
+            [video-rental.ledger.charge :as charge]
             [video-rental.inventory.search :as search]))
 
 (defn calculate-charge [current-year {:keys [tid] :as rent}]
   (assoc rent
-    :charge (film/price current-year (search/find-by-tid tid) rent)))
+    :charge (charge/charge current-year (search/find-by-tid tid) rent)))
 
 (defn rent-out [current-year user-id rent]
   (j/with-db-transaction [tconn db]
@@ -20,7 +21,8 @@
                          :rent-films
                          (map prepare-rentfilms))
           inserted-rents (j/insert-multi! tconn :rentfilm rentfilms)
+          rent-with-id (assoc rent :rentid rent-id)
           result (->> rentfilms
                       (map #(dissoc % :rentid))
-                      (assoc rent :rent-films))]
+                      (assoc rent-with-id :rent-films))]
       result)))
