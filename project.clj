@@ -6,7 +6,9 @@
                   [org.postgresql/postgresql "42.1.4"]
                   [metosin/spec-tools "0.5.1"]
                   [mount "0.1.11"]
-                  [korma "0.4.0"]]
+                  [korma "0.4.0"]
+                  [ring/ring-jetty-adapter "1.6.3"]
+                  [environ "1.1.0"]]
    :min-lein-version "2.0.0"
    :ring {:handler video-rental.handler/app
           :init mount.core/start
