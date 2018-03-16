@@ -5,19 +5,19 @@
             [video-rental.inventory.search :as search]
             [video-rental.db :refer [db]]))
 
-(defn calculate-surcharge [now {:keys [tid days created] :as rentfilm}]
+#_(defn calculate-surcharge [now {:keys [tid days created] :as rentfilm}]
   (let [days-since-created (util/days-between (util/to-zoned-date created) (util/now!))
         exceeded-days {:days (max 0 (- days-since-created days))}
         film (search/find-by-tid tid)
         current-year (util/year-of (util/now!))]
     (assoc rentfilm :surcharge (charge/surcharge current-year film exceeded-days))))
 
-(defn calculate-bonus [now {:keys [tid days created] :as rentfilm}]
+#_(defn calculate-bonus [now {:keys [tid days created] :as rentfilm}]
   (let [film (search/find-by-tid tid)
         current-year (util/year-of (util/now!))]
     (assoc rentfilm :bonus (charge/bonus current-year film))))
 
-(defn to-return [now user-id {:keys [rentid return-films] :as a-return}]
+#_(defn to-return [now user-id {:keys [rentid return-films] :as a-return}]
   (let [tids (->> return-films (map :tid) set)
         calculate-surcharge-now (partial calculate-surcharge now)
         calculate-bonus-now (partial calculate-bonus now)

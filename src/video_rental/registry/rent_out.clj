@@ -5,11 +5,11 @@
             [video-rental.ledger.charge :as charge]
             [video-rental.inventory.search :as search]))
 
-(defn calculate-charge [current-year {:keys [tid] :as rent}]
+#_(defn calculate-charge [current-year {:keys [tid] :as rent}]
   (assoc rent
     :charge (charge/charge current-year (search/find-by-tid tid) rent)))
 
-(defn rent-out [current-year user-id rent]
+#_(defn rent-out [current-year user-id rent]
   (j/with-db-transaction [tconn db]
     (let [insert-rent (j/insert! tconn :rent {:userid 1})
           id-with-h2-fallback #(:id % ((keyword "scope_identity()") %))

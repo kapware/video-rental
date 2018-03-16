@@ -26,19 +26,19 @@
       :tags ["api"]
       :coercion :spec
 
-      (GET "/film" []
+      #_(GET "/film" []
         :return (s/coll-of ::film/film)
         :query-params [title :- ::film/title]
         :summary "returns films"
         (ok (search/find-by-title title)))
 
-      (POST "/rent" []
+      #_(POST "/rent" []
         :return ::rent/rent
         :body [rent ::rent/rent]
         :summary "rent out films"
         (created nil (rent-out/rent-out (util/year-of (util/now!)) user-id rent)))
 
-      (POST "/return" []
+      #_(POST "/return" []
         :return ::return/return
         :body [return ::return/return]
         :summary "return films"

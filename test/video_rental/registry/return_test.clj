@@ -3,14 +3,14 @@
             [video-rental.registry.return :as sut]
             [clojure.spec.alpha :as spec]))
 
-(deftest return-request-examples
+#_(deftest return-request-examples
   (testing "Should support valid return requests"
     (is (spec/valid? ::sut/return {:rentid 1
                                    :return-films [{:tid "tt0133093"}
                                                   {:tid "tt0145487"}
                                                   {:tid "tt0316654"}]}))))
 
-(deftest return-response-examples
+#_(deftest return-response-examples
   (testing "Should support valid return responses"
     (is (spec/valid? ::sut/return {:rentid 3
                                    :return-films [{:tid "tt0133093" :surcharge 0M   :bonus 2}

@@ -31,7 +31,7 @@
 
 (use-fixtures :each wrap-test)
 
-(deftest calculate-surcharge-upon-return
+#_(deftest calculate-surcharge-upon-return
   (testing "should allow to return films"
     (let [;; given:
           now (util/to-zoned-date #inst"2003-11-30T20:34:39.957-00:00")

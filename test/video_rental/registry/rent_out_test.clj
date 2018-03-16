@@ -27,7 +27,7 @@
 
 (use-fixtures :each wrap-test)
 
-(deftest calculate-charge-upon-rent-out
+#_(deftest calculate-charge-upon-rent-out
   (testing "should allow renting out films"
     (let [;; given:
           current-year 2017

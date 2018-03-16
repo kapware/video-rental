@@ -23,14 +23,14 @@
 
 (use-fixtures :each wrap-test)
 
-(deftest find-by-title-test
+#_(deftest find-by-title-test
   (testing "should find films by title"
     (is (= (sut/find-by-title "Matrix")
            [{:tid "tt0133093", :title "Matrix (1999)", :year 1999}
             {:tid "tt0234215", :title "Matrix Reloaded (2003)", :year 2003}
             {:tid "tt0242653", :title "Matrix Revolutions (2003)", :year 2003}]))))
 
-(deftest find-by-tid-test
+#_(deftest find-by-tid-test
   (testing "should find films by tid"
     (is (= (sut/find-by-tid "tt0027977")
            {:tid "tt0027977", :title "Moderne Zeiten (1936)", :year 1936}))))

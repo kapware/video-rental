@@ -3,7 +3,7 @@
             [video-rental.inventory.film :as sut]
             [clojure.spec.alpha :as spec]))
 
-(deftest film-examples
+#_(deftest film-examples
   (testing "Should support valid films"
     (is (spec/valid? ::sut/film {:tid "tt0133093" :title "Matrix (1999)" :year 1999}))
     (is (spec/valid? ::sut/film {:tid "tt0145487" :title "Spider-Man (2002)" :year 2002}))
